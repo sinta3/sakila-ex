@@ -1,0 +1,48 @@
+//show all data from table film
+SELECT * FROM sakila.film;
+
+//show actor with last name 'HOPPER'
+SELECT * FROM sakila.actor
+WHERE last_name='HOPPER';
+
+//show film data order by length ascending
+SELECT * FROM sakila.film
+ORDER BY length ASC;
+
+//show customer data where first name have 'CE'
+SELECT * FROM sakila.customer
+WHERE first_name LIKE '%CE%';
+
+//show payment data where amount more than 5.00
+SELECT * FROM sakila.payment
+WHERE amount > 5.00;
+
+//show city where country is india
+SELECT city FROM sakila.city
+INNER JOIN sakila.country ON sakila.country.country_id = sakila.city.country_id
+WHERE sakila.country.country='India';
+
+//show film title where category is drama
+SELECT title FROM sakila.film
+INNER JOIN sakila.film_category ON sakila.film_category.film_id = sakila.film.film_id
+INNER JOIN sakila.category ON sakila.category.category_id = sakila.film_category.category_id
+WHERE sakila.category.name = 'Drama';
+
+//show film title where category is action and rating  PG
+SELECT title FROM sakila.film
+INNER JOIN sakila.film_category ON sakila.film_category.film_id = sakila.film.film_id
+INNER JOIN sakila.category ON sakila.category.category_id = sakila.film_category.category_id
+WHERE sakila.category.name = 'Action' and sakila.film.rating = 'PG';
+
+//show how many customer rent on store 1
+SELECT COUNT(customer_id)  FROM sakila.rental
+INNER JOIN sakila.staff ON sakila.staff.staff_id = sakila.rental.staff_id
+INNER JOIN sakila.store ON sakila.store.store_id = sakila.staff.store_id
+WHERE sakila.store.store_id = 1;
+
+//show country customer of 'BERNICE WILLIS'
+SELECT sakila.country.country FROM sakila.customer
+INNER JOIN sakila.address ON sakila.address.address_id = sakila.customer.address_id
+INNER JOIN sakila.city ON sakila.city.city_id = sakila.address.city_id
+INNER JOIN sakila.country ON sakila.country.country_id = sakila.city.country_id
+WHERE first_name='BERNICE' and last_name='WILLIS';
